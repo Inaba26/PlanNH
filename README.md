@@ -5,7 +5,7 @@
 
 In-game flowchart-based production planner for Minecraft 1.7.10 for the GTNH pack.
 
-# Disclaimer
+# Disclaimer 
 
 We are currently in the middle of a big rewrite of the UI, master brach has a lot of UI bugs that will be resolved in the rewrite, please do not report any bugs relative do this
 
