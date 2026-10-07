@@ -56,6 +56,14 @@ public class FlowchartScreen extends ModularScreen {
 
     public static CanvasWidget canvas;
 
+    private static String tr(final String key) {
+        return StatCollector.translateToLocal(key);
+    }
+
+    private static String trf(final String key, final Object... args) {
+        return StatCollector.translateToLocalFormatted(key, args);
+    }
+
     private FlowchartScreen(final ModularPanel panel) {
         super(PlanNH.MODID, panel);
         getContext().setSettings(new UISettings());
@@ -104,7 +112,7 @@ public class FlowchartScreen extends ModularScreen {
                             new Rectangle().hollow()
                                 .color(PlannhColors.CONTEXT_BORDER.getColor()))
                         .overlay(
-                            IKey.str("Add Note")
+                            IKey.str(tr("plannh.gui.add_note"))
                                 .color(Color.WHITE.main)))
                     .child(new ButtonWidget<>().onMousePressed(_ -> {
                         canvas.addGroup(canvas.getCanvasMouseX(), canvas.getCanvasMouseY());
@@ -116,7 +124,7 @@ public class FlowchartScreen extends ModularScreen {
                             new Rectangle().hollow()
                                 .color(PlannhColors.CONTEXT_BORDER.getColor()))
                         .overlay(
-                            IKey.str("Add Group")
+                            IKey.str(tr("plannh.gui.add_group"))
                                 .color(Color.WHITE.main))));
 
         mainColumn.child(
@@ -133,7 +141,7 @@ public class FlowchartScreen extends ModularScreen {
                             return true;
                         })
                             .overlay(IKey.str("<"))
-                            .addTooltipLine("Previous Graph"))
+                            .addTooltipLine(tr("plannh.gui.previous_graph")))
                         .child(
                             new TextFieldWidget().value(
                                 new StringValue.Dynamic(
@@ -148,7 +156,7 @@ public class FlowchartScreen extends ModularScreen {
                             return true;
                         })
                             .overlay(IKey.str(">"))
-                            .addTooltipLine("Next Graph"))
+                            .addTooltipLine(tr("plannh.gui.next_graph")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             addGraph(canvas);
                             return true;
@@ -156,7 +164,7 @@ public class FlowchartScreen extends ModularScreen {
                             .overlay(
                                 IKey.str("+")
                                     .color(Color.GREEN.main))
-                            .addTooltipLine("Add Graph"))
+                            .addTooltipLine(tr("plannh.gui.add_graph")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             deleteGraph(canvas);
                             return true;
@@ -164,7 +172,7 @@ public class FlowchartScreen extends ModularScreen {
                             .overlay(
                                 IKey.str("x")
                                     .color(Color.RED.main))
-                            .addTooltipLine("Remove Graph")))
+                            .addTooltipLine(tr("plannh.gui.remove_graph"))))
                 .child(
                     Flow.row()
                         .coverChildren()
@@ -177,7 +185,7 @@ public class FlowchartScreen extends ModularScreen {
                                     val -> Plan.getInstance()
                                         .setSnapToGrid(val)))
                                 .overlay(IKey.str("S2G"))
-                                .addTooltipLine("Snap to Grid"))
+                                .addTooltipLine(tr("plannh.gui.snap_to_grid")))
                         .child(
                             new EnumCycleButtonWidget<>(BalanceMode.class)
                                 .value(
@@ -192,7 +200,7 @@ public class FlowchartScreen extends ModularScreen {
                                 case FORWARD -> "F";
                                 case BACKWARD -> "B";
                                 }))
-                                .addTooltipLine("Cycle Balance Modes"))
+                                .addTooltipLine(tr("plannh.gui.cycle_balance_modes")))
                         .child(
                             new EnumCycleButtonWidget<>(SummaryMode.class)
                                 .value(
@@ -203,19 +211,19 @@ public class FlowchartScreen extends ModularScreen {
                                         val -> Plan.getInstance()
                                             .setSummaryMode(val)))
                                 .overlay(val -> IKey.str("S:" + (val == SummaryMode.CYCLES ? "C" : "T")))
-                                .addTooltipLine("Cycle Summary Modes"))
+                                .addTooltipLine(tr("plannh.gui.cycle_summary_modes")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             canvas.addGroup(canvas.getCanvasScreenCenterX(), canvas.getCanvasScreenCenterY());
                             return true;
                         })
                             .overlay(IKey.str("G"))
-                            .addTooltipLine("Add Group"))
+                            .addTooltipLine(tr("plannh.gui.add_group")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             canvas.addNote(canvas.getCanvasScreenCenterX(), canvas.getCanvasScreenCenterY());
                             return true;
                         })
                             .overlay(IKey.str("N"))
-                            .addTooltipLine("Add Note"))
+                            .addTooltipLine(tr("plannh.gui.add_note")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             PlanAPI.shareGraph(canvas.getGraph());
                             return true;
@@ -223,7 +231,7 @@ public class FlowchartScreen extends ModularScreen {
                             .overlay(
                                 IKey.str("Sh")
                                     .color(Color.GREEN_ACCENT.main))
-                            .addTooltipLine("Share Graph"))
+                            .addTooltipLine(tr("plannh.gui.share_graph")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             PlanAPI.copyToClipboard(canvas.getGraph());
                             Minecraft.getMinecraft().thePlayer.addChatMessage(
@@ -236,7 +244,7 @@ public class FlowchartScreen extends ModularScreen {
                             .overlay(
                                 IKey.str("Cp")
                                     .color(Color.BLUE_ACCENT.main))
-                            .addTooltipLine("Copy Graph"))
+                            .addTooltipLine(tr("plannh.gui.copy_graph")))
                         .child(new ButtonWidget<>().onMousePressed(_ -> {
                             final Graph graph = PlanAPI.importFromClipboard();
                             if (graph == null) return true;
@@ -252,7 +260,7 @@ public class FlowchartScreen extends ModularScreen {
                             .overlay(
                                 IKey.str("Im")
                                     .color(Color.YELLOW_ACCENT.main))
-                            .addTooltipLine("Import Graph"))
+                            .addTooltipLine(tr("plannh.gui.import_graph")))
                         .child(
                             new ButtonWidget<>().overlay(GuiTextures.COLOR_WHEEL)
                                 .onMousePressed(_ -> {
@@ -293,7 +301,7 @@ public class FlowchartScreen extends ModularScreen {
         final int size = plan.getGraphs()
             .size();
         plan.getGraphs()
-            .add(new Graph("Slot " + (size + 1)));
+            .add(new Graph(trf("plannh.gui.graph_slot_name", size + 1)));
         plan.setActiveIndex(size);
         refreshGraph(canvas);
     }
@@ -412,7 +420,13 @@ public class FlowchartScreen extends ModularScreen {
             GuiDraw.drawRect(0, 0, w, a.height, PlannhColors.SUMMARY_BG.getColor());
             GuiDraw.drawRect(0, 0, w, TITLE_H, PlannhColors.SUMMARY_TITLE_BG.getColor());
             GuiDraw.drawRect(0, TITLE_H, w, 1, PlannhColors.SUMMARY_TITLE_LINE.getColor());
-            GuiDraw.drawText("Summary", TITLE_TEXT_X, TITLE_TEXT_Y, 1.0f, PlannhColors.TEXT_WHITE.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.title"),
+                TITLE_TEXT_X,
+                TITLE_TEXT_Y,
+                1.0f,
+                PlannhColors.TEXT_WHITE.getColor(),
+                false);
             GuiDraw.drawText(
                 collapsed ? "[+]" : "\u2212",
                 w - COLLAPSE_W,
@@ -433,7 +447,7 @@ public class FlowchartScreen extends ModularScreen {
             ly = drawSection(
                 ly,
                 w,
-                "Products",
+                tr("plannh.gui.summary.products"),
                 s.outputs(),
                 PlannhColors.SECTION_PRODUCT.getColor(),
                 PlannhColors.ACCENT_AMBER.getColor(),
@@ -444,7 +458,7 @@ public class FlowchartScreen extends ModularScreen {
             ly = drawSection(
                 ly,
                 w,
-                "External Inputs",
+                tr("plannh.gui.summary.inputs"),
                 s.inputs(),
                 PlannhColors.SECTION_INPUT.getColor(),
                 PlannhColors.ACCENT_GREEN2.getColor(),
@@ -458,7 +472,7 @@ public class FlowchartScreen extends ModularScreen {
                 ly = drawSection(
                     ly,
                     w,
-                    "Properties",
+                    tr("plannh.gui.summary.properties"),
                     s.properties(),
                     PlannhColors.SECTION_OPS.getColor(),
                     PlannhColors.SECTION_OPS.getColor(),
@@ -475,7 +489,7 @@ public class FlowchartScreen extends ModularScreen {
                     SECTION_H,
                     PlannhColors.SECTION_OPS.getColor());
                 GuiDraw.drawText(
-                    "Operations",
+                    tr("plannh.gui.summary.operations"),
                     SECTION_HEADER_TEXT_X,
                     ly + SECTION_HEADER_TEXT_Y_OFF,
                     1.0f,
@@ -501,22 +515,23 @@ public class FlowchartScreen extends ModularScreen {
 
             if (br.totalOperations() > 0 || br.totalDurationTicks() > 0) {
                 final StringBuilder totals = new StringBuilder();
-                if (br.totalOperations() > 0) totals.append("Ops: ")
+                if (br.totalOperations() > 0) totals.append(tr("plannh.gui.summary.ops_prefix"))
                     .append(br.totalOperations());
                 if (br.totalDurationTicks() > 0) {
                     final float sec = (float) br.totalDurationTicks() / GuiHelper.TICKS_PER_SECOND;
                     if (!totals.isEmpty()) totals.append("  ");
                     if (isCycle) {
-                        totals.append("Time: ")
+                        totals.append(tr("plannh.gui.summary.time_prefix"))
                             .append(br.totalDurationTicks())
                             .append("t");
                         if (sec > 0) totals.append(" (")
                             .append(String.format("%.1f", sec))
-                            .append("s/cycle)");
+                            .append(tr("plannh.gui.summary.seconds_per_cycle_suffix"))
+                            .append(")");
                     } else {
-                        totals.append("Cycle: ")
+                        totals.append(tr("plannh.gui.summary.cycle_prefix"))
                             .append(String.format("%.1f", sec))
-                            .append("s");
+                            .append(tr("plannh.gui.summary.seconds_suffix"));
                     }
                 }
                 GuiDraw.drawRect(0, ly - SEPARATOR_Y_OFF, w, 1, PlannhColors.SEPARATOR_LIGHT.getColor());
@@ -527,9 +542,9 @@ public class FlowchartScreen extends ModularScreen {
 
             final BalanceMode mode = g.getBalanceMode();
             final String modeStr = switch (mode) {
-                case NONE -> "Mode: Normal";
-                case FORWARD -> "Mode: Inputs\u2192Outputs";
-                case BACKWARD -> "Mode: Outputs\u2192Inputs";
+                case NONE -> tr("plannh.gui.summary.mode.normal");
+                case FORWARD -> tr("plannh.gui.summary.mode.forward");
+                case BACKWARD -> tr("plannh.gui.summary.mode.backward");
             };
             GuiDraw.drawText(modeStr, MODE_TEXT_X, ly, 0.9f, PlannhColors.ACCENT_BLUE.getColor(), false);
             ly += MODE_LINE_H;
@@ -542,23 +557,47 @@ public class FlowchartScreen extends ModularScreen {
                 PlannhColors.SEPARATOR_DIM.getColor());
             ly += HELP_SEP_GAP;
             GuiDraw.drawText(
-                "Zoom: " + canvas.getGraph()
-                    .getZoom() * 100 + "%",
+                trf("plannh.gui.summary.zoom", canvas.getGraph()
+                    .getZoom() * 100),
                 ZOOM_TEXT_X,
                 ly,
                 0.9f,
                 PlannhColors.TEXT_MUTED.getColor(),
                 false);
             ly += ZOOM_LINE_H;
-            GuiDraw.drawText("[Scroll] zoom", 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.help.scroll_zoom"),
+                6,
+                ly,
+                0.8f,
+                PlannhColors.TEXT_FAINT.getColor(),
+                false);
             ly += HELP_LINE_H;
-            GuiDraw.drawText("[MMB] pan", 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(tr("plannh.gui.summary.help.mmb_pan"), 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
             ly += HELP_LINE_H;
-            GuiDraw.drawText("[LMB drag] move node", 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.help.lmb_drag_move_node"),
+                6,
+                ly,
+                0.8f,
+                PlannhColors.TEXT_FAINT.getColor(),
+                false);
             ly += HELP_LINE_H;
-            GuiDraw.drawText("[Double-click] open NEI", 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.help.double_click_open_nei"),
+                6,
+                ly,
+                0.8f,
+                PlannhColors.TEXT_FAINT.getColor(),
+                false);
             ly += HELP_LINE_H;
-            GuiDraw.drawText("[+ in NEI GUI] add recipe", 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.help.add_recipe"),
+                6,
+                ly,
+                0.8f,
+                PlannhColors.TEXT_FAINT.getColor(),
+                false);
         }
 
         private int drawSection(int ly, final int w, final String title, final List<Summary.Line<?>> items,
@@ -567,7 +606,7 @@ public class FlowchartScreen extends ModularScreen {
             if (items.isEmpty()) return ly;
             GuiDraw.drawRect(SECTION_HEADER_X, ly, w - SECTION_HEADER_X * 2, SECTION_H, headerColor);
             GuiDraw.drawText(
-                title + " (" + items.size() + ")",
+                trf("plannh.gui.summary.section_with_count", title, items.size()),
                 SECTION_HEADER_TEXT_X,
                 ly + SECTION_HEADER_TEXT_Y_OFF,
                 1.0f,

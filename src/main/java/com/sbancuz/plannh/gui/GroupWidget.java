@@ -5,6 +5,8 @@ import static com.sbancuz.plannh.data.flowchart.Group.GROUP_MIN_W;
 import java.util.Map;
 import java.util.UUID;
 
+import net.minecraft.util.StatCollector;
+
 import com.cleanroommc.modularui.api.IPanelHandler;
 import com.cleanroommc.modularui.api.drawable.IKey;
 import com.cleanroommc.modularui.drawable.DynamicDrawable;
@@ -74,7 +76,7 @@ public class GroupWidget extends FlowchartWidget<GroupWidget, Group> {
                 .overlay(
                     IKey.str("CC")
                         .color(Color.WHITE.main))
-                .addTooltipLine("Toggle Cover Children"))
+                .addTooltipLine(StatCollector.translateToLocal("plannh.gui.toggle_cover_children")))
             .child(
                 new ButtonWidget<>().overlay(GuiTextures.COLOR_WHEEL)
                     .onMousePressed(_ -> {

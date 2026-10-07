@@ -1,0 +1,137 @@
+## Mod 设置
+
+## 设置
+## 设置 - 通用
+plannh.settings.tick_modifier=加速
+plannh.settings.machines=机器
+plannh.settings.burnable_override=可燃物覆盖
+
+## 设置 - GT
+plannh.settings.voltage=电压等级
+plannh.settings.amp=电流
+plannh.settings.speed=速度
+plannh.settings.parallels=并行数
+plannh.settings.machine_heat=机器热量
+plannh.settings.recipe_heat=配方热量
+plannh.settings.heat_discount_mult=热折扣%
+plannh.settings.eut_discount=EU 折扣%
+plannh.settings.eut_increase_per_oc=EU%/超频
+plannh.settings.duration_decrease_per_oc=速率%/超频
+plannh.settings.max_overclocks=最大超频
+plannh.settings.max_regular_oc=最大常规超频
+plannh.settings.max_tier_skips=最大跳级
+plannh.settings.fuel_efficiency=燃料效率%
+plannh.settings.perfect_oc=完美超频
+plannh.settings.heat_oc=热超频
+plannh.settings.heat_discount=热折扣
+plannh.settings.laser_oc=激光超频
+plannh.settings.unlimited_skips=无限跳级
+plannh.settings.no_overclock=不超频
+
+## 设置 - Botania
+plannh.settings.mana_per_tick=Mana/t
+
+## 设置 - Thaumcraft（及相关）
+plannh.settings.vis_per_tick=Vis/t
+
+## 设置 - CoFH Core
+plannh.settings.rf_per_tick=RF/t
+
+## 属性
+## 属性 - 通用
+plannh.properties.duration_ticks=时长
+plannh.properties.num_components=组件数
+
+## 属性 - GT（及相关）
+plannh.properties.special_value=特殊值
+plannh.properties.bartworks.glass_tier=玻璃等级
+plannh.properties.bartworks.sievert=西弗
+plannh.properties.bartworks.sievert_exact=精确西弗
+plannh.properties.bartworks.mass=质量
+plannh.properties.total_eu=总 EU
+plannh.properties.eu_per_tick=EU/t
+
+## 属性 - Botania
+plannh.properties.mana_cost=Mana 消耗
+
+## 属性 - Thaumcraft（及相关）
+plannh.properties.vis_cost=Vis 消耗
+plannh.properties.instability=不稳定度
+plannh.properties.total_vis=总 Vis
+plannh.properties.research_key=研究键
+
+## 属性 - Forestry
+plannh.properties.forestry.processing_time=处理时间
+
+## 属性 - CoFH Core
+plannh.properties.rf_total=总 RF
+
+## 属性 - Ender IO
+plannh.properties.experience=经验值
+
+## 分享消息
+plannh.share.import_link=> 导入 PlanNH
+plannh.share.item_name=§bPlanNH 分享
+plannh.share.item_lore=§7%s
+plannh.share.lore_shared=§7已分享流程图
+plannh.share.click_to_import=§e点击导入
+plannh.share.import_error.missing=§c缺少 NBT 数据
+plannh.share.import_error.invalid=§c无效的 PlanNH 数据
+plannh.share.import_error.decode=§c解码失败：%s
+plannh.share.slot_imported=已导入
+plannh.share.copy_to_clipboard=流程图已复制到剪贴板
+plannh.share.copy_from_clipboard=已从剪贴板导入流程图
+
+## NEI 配置
+nei.options.plannh = "PlanNH";
+nei.options.plannh.item_columns=物品栏列数
+nei.options.plannh.item_columns.tip=NEI 物品面板的列数（最少：6）
+nei.options.plannh.blur_strength=模糊强度
+nei.options.plannh.blur_strength.tip=背景模糊程度（0 = 关闭）
+nei.options.plannh.burnable_override=显示可燃物设置
+nei.options.plannh.burnable_override.0=关闭
+nei.options.plannh.burnable_override.1=开启
+nei.options.plannh.burnable_override.tip=在配方配置中隐藏/显示可燃物覆盖（某些多产物配方显示异常时可能有用）
+nei.options.plannh.show_grid=显示网格
+nei.options.plannh.show_grid.0=关闭
+nei.options.plannh.show_grid.1=开启
+nei.options.plannh.show_grid.tip=在画布中隐藏/显示网格
+nei.options.plannh.background_color=背景颜色
+nei.options.plannh.background_color.tip=画布背景颜色
+
+## GUI
+plannh.gui.add_note=添加便签
+plannh.gui.add_group=添加分组
+plannh.gui.previous_graph=上一个流程图
+plannh.gui.next_graph=下一个流程图
+plannh.gui.add_graph=新增流程图
+plannh.gui.remove_graph=删除流程图
+plannh.gui.snap_to_grid=对齐网格
+plannh.gui.cycle_balance_modes=切换平衡模式
+plannh.gui.cycle_summary_modes=切换汇总模式
+plannh.gui.share_graph=分享流程图
+plannh.gui.copy_graph=复制流程图
+plannh.gui.import_graph=导入流程图
+plannh.gui.toggle_cover_children=切换自动包裹子项
+plannh.gui.graph_slot_name=槽位 %s
+plannh.gui.machine_settings=机器设置
+plannh.gui.summary.title=汇总
+plannh.gui.summary.products=产物
+plannh.gui.summary.inputs=输入
+plannh.gui.summary.properties=属性
+plannh.gui.summary.operations=操作次数
+plannh.gui.summary.section_with_count=%s（%s）
+plannh.gui.summary.ops_prefix=操作: 
+plannh.gui.summary.time_prefix=时长: 
+plannh.gui.summary.cycle_prefix=周期: 
+plannh.gui.summary.seconds_per_cycle_suffix=秒/周期
+plannh.gui.summary.seconds_suffix=秒
+plannh.gui.summary.mode.normal=模式：普通
+plannh.gui.summary.mode.forward=模式：输入→输出
+plannh.gui.summary.mode.backward=模式：输出→输入
+plannh.gui.summary.zoom=缩放：%.0f%%
+plannh.gui.summary.help.scroll_zoom=[滚轮] 缩放
+plannh.gui.summary.help.mmb_pan=[中键] 平移
+plannh.gui.summary.help.lmb_drag_move_node=[左键拖动] 移动节点
+plannh.gui.summary.help.double_click_open_nei=[双击] 打开 NEI
+plannh.gui.summary.help.add_recipe=[在 NEI 界面点 +] 添加配方
