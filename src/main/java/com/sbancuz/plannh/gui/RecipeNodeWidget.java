@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.cleanroommc.modularui.api.widget.Interactable;
@@ -135,6 +136,10 @@ public class RecipeNodeWidget extends Widget<RecipeNodeWidget> implements Intera
     private long lastHandlerUpdate = 0;
     private boolean configOpen = false;
     private final List<ClickZone> configZones = new ArrayList<>();
+
+    private static String tr(final String key) {
+        return StatCollector.translateToLocal(key);
+    }
 
     private record ClickZone(int ux1, int uy1, int ux2, int uy2, Runnable action) {
 
@@ -631,8 +636,8 @@ public class RecipeNodeWidget extends Widget<RecipeNodeWidget> implements Intera
         final int x = LEFT_CONTENT_X;
         final int y0 = CONTENT_TOP + neiWidget.h + THROUGHPUT_GAP + calcInfoHeight();
         final MachineProfile profile = node.machineConfig.getProfile();
-        int panelH = profile.settings()
-            .size() * LINE_H + 4;
+        int panelH = (profile.settings()
+            .size() + 1) * LINE_H + 4;
         if (node.getAvailableExtractors()
             .size() > 1) panelH += LINE_H;
         GuiDraw.drawRect(
@@ -644,6 +649,9 @@ public class RecipeNodeWidget extends Widget<RecipeNodeWidget> implements Intera
 
         final MachineConfig c = node.machineConfig;
         int y = y0;
+
+        GuiDraw.drawText(tr("plannh.gui.machine_settings"), x, y, 1.0f, PlannhColors.TEXT_WHITE.getColor(), false);
+        y += LINE_H;
 
         for (final SettingDef<?> def : profile.settings()) {
             y = drawSetting(x, y, def, c);
@@ -711,8 +719,8 @@ public class RecipeNodeWidget extends Widget<RecipeNodeWidget> implements Intera
     private int computeConfigPanelHeight() {
         if (!configOpen) return 0;
         final MachineProfile profile = node.machineConfig.getProfile();
-        int h = profile.settings()
-            .size() * LINE_H + 8;
+        int h = (profile.settings()
+            .size() + 1) * LINE_H + 8;
         if (node.getAvailableExtractors()
             .size() > 1) h += LINE_H;
         return h;
