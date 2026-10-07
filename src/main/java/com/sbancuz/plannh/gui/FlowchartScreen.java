@@ -557,8 +557,10 @@ public class FlowchartScreen extends ModularScreen {
                 PlannhColors.SEPARATOR_DIM.getColor());
             ly += HELP_SEP_GAP;
             GuiDraw.drawText(
-                trf("plannh.gui.summary.zoom", canvas.getGraph()
-                    .getZoom() * 100),
+                trf(
+                    "plannh.gui.summary.zoom",
+                    canvas.getGraph()
+                        .getZoom() * 100),
                 ZOOM_TEXT_X,
                 ly,
                 0.9f,
@@ -573,7 +575,13 @@ public class FlowchartScreen extends ModularScreen {
                 PlannhColors.TEXT_FAINT.getColor(),
                 false);
             ly += HELP_LINE_H;
-            GuiDraw.drawText(tr("plannh.gui.summary.help.mmb_pan"), 6, ly, 0.8f, PlannhColors.TEXT_FAINT.getColor(), false);
+            GuiDraw.drawText(
+                tr("plannh.gui.summary.help.mmb_pan"),
+                6,
+                ly,
+                0.8f,
+                PlannhColors.TEXT_FAINT.getColor(),
+                false);
             ly += HELP_LINE_H;
             GuiDraw.drawText(
                 tr("plannh.gui.summary.help.lmb_drag_move_node"),
